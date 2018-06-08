@@ -3,9 +3,11 @@ package Ex1;
 public class Health extends Insurance {
 
     public Health() {
+        this.insuranceType = "Health";
     }
 
     public Health(double monthlyCost) {
+        this();
         this.monthlyCost = monthlyCost;
     }
 
@@ -16,6 +18,6 @@ public class Health extends Insurance {
 
     @Override
     public void displayInfo() {
-        System.out.printf("Health Insurance Monthly Cost: %s",getMonthlyCost());
+        System.out.printf("%s Insurance Monthly Cost: $%s%n",getInsuranceType(),getMonthlyCost());
     }
 }
