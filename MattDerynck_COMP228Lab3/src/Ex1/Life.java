@@ -17,6 +17,6 @@ public class Life extends Insurance {
 
     @Override
     public String displayInfo() {
-        return String.format("%s Insurance Monthly Cost: $%s%n",getInsuranceType(),getMonthlyCost());
+        return String.format("%s Insurance Monthly Cost: $%.2f%n",getInsuranceType(),getMonthlyCost());
     }
 }
