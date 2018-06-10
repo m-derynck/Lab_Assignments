@@ -5,7 +5,7 @@ public abstract class Insurance {
     protected double monthlyCost;
 
     public abstract void setInsuranceCost(double cost);
-    public abstract void displayInfo();
+    public abstract String displayInfo();
 
 
     public String getInsuranceType() {
