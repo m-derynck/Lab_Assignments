@@ -29,8 +29,10 @@ public class InsuranceDriver {
         JTextField monthlyCost = new JTextField();
         panel.add(monthlyCostLbl);
         panel.add(monthlyCost);
-        JOptionPane.showConfirmDialog(null, panel, "Choose Insurance Type", JOptionPane.DEFAULT_OPTION);
-
+        int selection = JOptionPane.showConfirmDialog(null, panel, "Choose Insurance Type", JOptionPane.DEFAULT_OPTION);
+        if(selection == -1){
+            displayMenu();
+        }
         double monthlyCostAmnt = inputToDouble(monthlyCost.getText());
         Insurance userInsurance;
         //Check if our monthly cost is a valid input
@@ -72,20 +74,28 @@ public class InsuranceDriver {
     private static void displayMenu() {
         String[] options;
         int selection;
-        if (insuranceList.size() > 0) {
+        boolean multiplePolicies = (insuranceList.size() > 0);
+        if (multiplePolicies) {
             options = new String[]{"New Policy", "List policies", "Exit"};
             selection = JOptionPane.showOptionDialog(null, "Select an option", "Insurance Menu", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, 0);
         } else {
             options = new String[]{"New Policy", "Exit"};
             selection = JOptionPane.showOptionDialog(null, "Select an option", "Insurance Menu", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, 0);
         }
-        //Create a new insurance policy
-        if (selection == 0) {
+
+        if (selection == 0){//Create a new insurance policy
             displayInsurance();
-        } else if (selection == 1) {//Display all the insurance policies.
-            polymorphicSetDisplay();
-            displayMenu();
-        } else {//Exit the system.
+        }
+        else if(selection == 1){
+            if(multiplePolicies){//Display all the insurance policies.
+                polymorphicSetDisplay();
+                displayMenu();
+            }
+            else{//Exit the system.
+                System.exit(0);
+            }
+        }
+        else{//Exit the system.
             System.exit(0);
         }
     }
