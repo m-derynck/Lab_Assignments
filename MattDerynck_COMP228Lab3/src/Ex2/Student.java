@@ -1,15 +1,18 @@
 package Ex2;
 
+import java.util.Optional;
+
 public abstract class Student {
 
     private String name;
     private boolean fullTime;
 
-    public Student(){
-
+    public Student(String name, boolean fullTime){
+        this.name = name;
+        this.fullTime = fullTime;
     }
 
-    public abstract double tuitionFee();
+    public abstract double tuitionFee(double creditHours);
 
     public String getName() {
         return name;
