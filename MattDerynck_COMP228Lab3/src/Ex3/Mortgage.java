@@ -30,7 +30,7 @@ method to display all the mortgage data.
 
         double amountOwing = ((getMortgageAmount() * (getInterestRate()/100)) * term) + getMortgageAmount();
 
-        return String.format("Mortgage Provided by: %s%nMortgage Number: %d%nCustomer Name: %s%nMortgage Amount: %.2f%nInterest Rate: %.2f%nMortgage Term: %d%nAmount Owing: $%.2f%n%n",
+        return String.format("Mortgage Provided by: %s%nMortgage Number: %d%nCustomer Name: %s%nMortgage Amount: $%.2f%nInterest Rate: %.2f%nMortgage Term: %d Year(s)%nAmount Owing: $%.2f%n%n",
                 bankName,getMortgageNumber(), getCustomerName(), getMortgageAmount(), getInterestRate(), getTerm(), amountOwing);
     }
 
