@@ -53,7 +53,7 @@ public class StudentForm extends JFrame {
         displayBtn = new JButton("Display");
         displayBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         displayBtn.addActionListener(e -> displayInformation());
-        displayArea = new JTextArea(3, 0);
+        displayArea = new JTextArea(4, 0);
         displayArea.setEditable(false);
         //Add the scrollbar effect to the text area.
         displayScroll = new JScrollPane(displayArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
