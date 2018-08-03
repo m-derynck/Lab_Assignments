@@ -9,6 +9,9 @@ public class Player {
     private String province;
     private String phoneNumber;
 
+    public Player(){}
+
+
     public Player(int playerID, String firstName, String lastName, String address, String postalCode, String province, String phoneNumber) {
         this.playerID = playerID;
         this.firstName = firstName;
@@ -21,6 +24,10 @@ public class Player {
 
     public int getPlayerID() {
         return playerID;
+    }
+
+    public void setPlayerID(int playerID) {
+        this.playerID = playerID;
     }
 
     public String getFirstName() {
@@ -69,5 +76,10 @@ public class Player {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s",getFirstName(), getLastName());
     }
 }
