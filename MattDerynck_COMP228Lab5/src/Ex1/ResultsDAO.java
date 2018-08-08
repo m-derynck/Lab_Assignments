@@ -14,15 +14,14 @@ public class ResultsDAO implements DAO<Result> {
     private GameDAO gameDAO = new GameDAO();
     private PlayerDAO playerDAO = new PlayerDAO();
 
-    private Result createResult(ResultSet rs){
+    private Result createResult(ResultSet rs) {
         Result result = new Result();
-        try{
+        try {
             result.setGame(gameDAO.get(rs.getInt("game_id")));
             result.setPlayer(playerDAO.get(rs.getInt("player_id")));
             result.setDatePlayed(rs.getDate("playing_date"));
             result.setScore(rs.getInt("score"));
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return result;
@@ -37,7 +36,7 @@ public class ResultsDAO implements DAO<Result> {
             Connection con = DriverManager.getConnection(DATABASE_URL);
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sqlStatement);
-            if(rs.next()) {
+            if (rs.next()) {
                 result = createResult(rs);
             }
             con.close();
@@ -50,46 +49,44 @@ public class ResultsDAO implements DAO<Result> {
         return result;
     }
 
-    public List<Result> getPlayerResults(int playerId){
-        String sqlStatement = String.format("Select * from PlayerAndGame where player_id = %d order by player_game_id",playerId);
+    public List<Result> getPlayerResults(int playerId) {
+        String sqlStatement = String.format("Select * from PlayerAndGame where player_id = %d order by player_game_id", playerId);
         List<Result> resultList = new ArrayList<>();
-        try{
+        try {
             Class.forName(DRIVER);
             Connection con = DriverManager.getConnection(DATABASE_URL);
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sqlStatement);
-            while(rs.next()){
+            while (rs.next()) {
                 Result result = createResult(rs);
                 resultList.add(result);
             }
             con.close();
             statement.close();
             rs.close();
-        }
-        catch(SQLException | ClassNotFoundException e ){
+        } catch (SQLException | ClassNotFoundException e) {
             //Display exception in a window here.
             System.out.println(e.getMessage());
         }
         return resultList;
     }
 
-    public List<Result> getGameResults(int gameId){
-        String sqlStatement = String.format("Select * from PlayerAndGame where game_id = %d order by player_game_id",gameId);
+    public List<Result> getGameResults(int gameId) {
+        String sqlStatement = String.format("Select * from PlayerAndGame where game_id = %d order by player_game_id", gameId);
         List<Result> resultList = new ArrayList<>();
-        try{
+        try {
             Class.forName(DRIVER);
             Connection con = DriverManager.getConnection(DATABASE_URL);
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sqlStatement);
-            while(rs.next()){
+            while (rs.next()) {
                 Result result = createResult(rs);
                 resultList.add(result);
             }
             con.close();
             statement.close();
             rs.close();
-        }
-        catch(SQLException | ClassNotFoundException e ){
+        } catch (SQLException | ClassNotFoundException e) {
             //Display exception in a window here.
             System.out.println(e.getMessage());
         }
@@ -100,20 +97,19 @@ public class ResultsDAO implements DAO<Result> {
     public List<Result> getAll() {
         String sqlStatement = "Select * from PlayerAndGame order by player_game_id";
         List<Result> resultList = new ArrayList<>();
-        try{
+        try {
             Class.forName(DRIVER);
             Connection con = DriverManager.getConnection(DATABASE_URL);
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sqlStatement);
-            while(rs.next()){
+            while (rs.next()) {
                 Result result = createResult(rs);
                 resultList.add(result);
             }
             con.close();
             statement.close();
             rs.close();
-        }
-        catch(SQLException | ClassNotFoundException e ){
+        } catch (SQLException | ClassNotFoundException e) {
             //Display exception in a window here.
             System.out.println(e.getMessage());
         }
@@ -128,15 +124,14 @@ public class ResultsDAO implements DAO<Result> {
                 new SimpleDateFormat("yyyy-MM-dd").format(result.getDatePlayed()),
                 result.getScore()
         );
-        try{
+        try {
             Class.forName(DRIVER);
             Connection con = DriverManager.getConnection(DATABASE_URL);
             Statement statement = con.createStatement();
             statement.execute(sqlStatement);
             con.close();
             statement.close();
-        }
-        catch(SQLException | ClassNotFoundException e){
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }

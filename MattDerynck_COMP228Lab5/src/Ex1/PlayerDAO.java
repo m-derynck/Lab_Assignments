@@ -37,7 +37,7 @@ public class PlayerDAO implements DAO<Player> {
             Connection con = DriverManager.getConnection(DATABASE_URL);
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sqlStatement);
-            if(rs.next()) {
+            if (rs.next()) {
                 player = createPlayer(rs);
             }
             con.close();
@@ -83,27 +83,27 @@ public class PlayerDAO implements DAO<Player> {
                 player.getPostalCode(),
                 player.getProvince(),
                 player.getPhoneNumber()
-                );
-        try{
+        );
+        try {
             Class.forName(DRIVER);
             Connection con = DriverManager.getConnection(DATABASE_URL);
             Statement statement = con.createStatement();
             statement.execute(sqlStatement);
             con.close();
             statement.close();
-        }
-        catch(SQLException | ClassNotFoundException e){
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
 
     }
 
     //If we need to delete add the functionality here.
+    // NOTE * This wont work if a result has been stored for the specified player as it wont cascade delete.
     @Override
     public void delete(Player player) {
         String sqlStatement = String.format("Delete from Player where player_id = %d", player.getPlayerID());
         String cascadeStatement = String.format("Delete from PlayerAndGame where player_id = %d", player.getPlayerID());
-        try{
+        try {
             Class.forName(DRIVER);
             Connection con = DriverManager.getConnection(DATABASE_URL);
             Statement statement = con.createStatement();
@@ -111,8 +111,7 @@ public class PlayerDAO implements DAO<Player> {
             statement.execute(sqlStatement);
             con.close();
             statement.close();
-        }
-        catch(SQLException | ClassNotFoundException e){
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
 
@@ -129,15 +128,14 @@ public class PlayerDAO implements DAO<Player> {
                 params[5],
                 player.getPlayerID()
         );
-        try{
+        try {
             Class.forName(DRIVER);
             Connection con = DriverManager.getConnection(DATABASE_URL);
             Statement statement = con.createStatement();
             statement.execute(sqlStatement);
             con.close();
             statement.close();
-        }
-        catch(SQLException | ClassNotFoundException e){
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }

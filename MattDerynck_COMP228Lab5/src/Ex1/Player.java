@@ -9,7 +9,8 @@ public class Player {
     private String province;
     private String phoneNumber;
 
-    public Player(){}
+    public Player() {
+    }
 
 
     public Player(int playerID, String firstName, String lastName, String address, String postalCode, String province, String phoneNumber) {
@@ -80,6 +81,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return String.format("%s %s",getFirstName(), getLastName());
+        return String.format("%s %s", getFirstName(), getLastName());
     }
 }

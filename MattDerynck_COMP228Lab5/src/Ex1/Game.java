@@ -27,4 +27,9 @@ public class Game {
     public void setGameTitle(String gameTitle) {
         this.gameTitle = gameTitle;
     }
+
+    @Override
+    public String toString() {
+        return getGameTitle();
+    }
 }
